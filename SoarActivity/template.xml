@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<template
+    format="5"
+    revision="1"
+    name="Soar Activity"
+    minApi="14"
+    minBuildApi="14"
+    description="MVP框架activity基类">
+
+    <category value="Activity" />
+
+    <parameter
+        id="activityClass"
+        name="Activity Name"
+        type="string"
+        constraints="class|unique|nonempty"
+        default="BaseActivity"
+        help="The name of the activity class to create" />
+
+
+
+    <parameter
+        id="activityLayout"
+        name="Activity Layout Name"
+        type="string"
+        constraints="layout|unique|nonempty"
+        suggest="activity_${classToResource(activityClass)}"
+        default="activity_base"
+        help="The name of the layout to create for the activity" />
+
+
+<parameter
+        id="IViewInterface"
+        name="ViewInterface Name"
+        type="string"
+        constraints="class|unique|nonempty"
+        suggest="I${underscoreToCamelCase(classToResource(activityClass))}View"
+        default="MvpInterface"
+        help="The name of the Contact class to create" />
+
+
+    <parameter
+        id="IPresenterInterface"
+        name="PresenterInterface Name"
+        type="string"
+        constraints="class|unique|nonempty"
+        suggest="I${underscoreToCamelCase(classToResource(activityClass))}Presenter"
+        default="MvpInterface"
+        help="The name of the Contact class to create" />
+	
+
+    <parameter
+        id="presenterClass"
+        name="Presenter Name"
+        type="string"
+        constraints="class|unique|nonempty"
+        suggest="${underscoreToCamelCase(classToResource(activityClass))}Presenter"
+        default="MainViewModel"
+        help="The name of the Presenter class to create" />
+
+    <parameter
+        id="packageName"
+        name="Package name"
+        type="string"
+        constraints="package"
+        default="com.mongootech.mongyan.mvp" />
+
+
+    <execute file="recipe.xml.ftl" />
+
+</template>
