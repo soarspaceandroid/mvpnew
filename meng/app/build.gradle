@@ -1,0 +1,135 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'realm-android'
+apply plugin: 'com.alibaba.arouter'
+apply plugin: 'walle'
+apply from: 'tinkerpatch.gradle'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion '29.0.3'
+    defaultConfig {
+        applicationId "com.mongootech.mongyan"
+        minSdkVersion 21
+        targetSdkVersion 29
+        multiDexEnabled true
+        versionCode 20200427
+        versionName "1.0.0"
+
+        //tinker
+        multiDexKeepProguard file("tinkerMultidexKeep.pro") //keep specific classes using proguard syntax
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        ndk {
+            //选择要添加的对应 cpu 类型的 .so 库。
+            abiFilters "armeabi-v7a", "arm64-v8a"
+        }
+
+        manifestPlaceholders = [JPUSH_PKGNAME: applicationId,
+                                JPUSH_CHANNEL: "",
+        ]
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+
+        lintOptions {
+            checkReleaseBuilds false
+            abortOnError false
+        }
+
+        aaptOptions {
+            cruncherEnabled = false
+        }
+
+
+
+    }
+
+
+    signingConfigs {
+        releaseConfig {
+            storeFile file("../keystore/mong.jks")
+            storePassword 'mong52653321'
+            keyAlias 'mong'
+            keyPassword 'mong52653321'
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.releaseConfig
+            manifestPlaceholders.put("JPUSH_APPKEY", "316558cd467318221b68dbed")
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.releaseConfig
+            manifestPlaceholders.put("JPUSH_APPKEY", "74674beb9a9b02250d30dd30")
+        }
+    }
+
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+    packagingOptions {
+        exclude 'META-INF/proguard/coroutines.pro'
+    }
+}
+
+
+walle {
+    // 指定渠道包的输出路径
+    apkOutputFolder = new File("${project.getProjectDir()}/release/channels")
+    // 定制渠道包的APK的文件名称
+    apkFileNameFormat = 'mengyan_origin.apk'
+    // 渠道配置文件
+    channelFile = new File("${project.getProjectDir()}/channels")
+}
+
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    kapt 'com.alibaba:arouter-compiler:1.2.2'
+
+
+    //极光
+    implementation 'cn.jiguang.sdk:jpush:3.1.7'
+    implementation 'cn.jiguang.sdk:jcore:1.2.6'
+    //友盟
+    implementation project(path: ':umenglibrary')
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+
+    //支付
+    implementation files('libs/alipaySdk-15.7.5-20200422171619.aar')
+
+    //阴影 , 圆角
+    implementation 'com.github.lihangleo2:ShadowLayout:2.1.8'
+
+    //自适应imageview 还有边框和形状
+    implementation 'am.widget:shapeimageview:2.0.1'
+
+    //首页
+    implementation 'com.yinglan.alphatabs:library:1.0.8'
+
+}

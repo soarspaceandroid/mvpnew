@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:id="@+id/title_parent"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
+
+    <FrameLayout
+        android:id="@+id/left_content"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp">
+
+    <TextView
+        android:id="@+id/title_left"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:singleLine="true"
+        android:gravity="center_vertical"
+        android:drawableLeft="@mipmap/pic_back_black"
+        android:foregroundGravity="left"
+        tools:text="返回"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    </FrameLayout>
+
+
+
+
+    <FrameLayout
+        android:id="@+id/info_container"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:singleLine="true"
+            android:layout_gravity="center"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:ellipsize="marquee"
+            android:focusableInTouchMode="true"
+            android:focusable="true"
+            tools:text="fdsafsdafdsafdsaafdsafasdfasdfd"
+            android:textSize="18sp"
+            />
+
+
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:id="@+id/right_content"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical|right"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp">
+
+
+        <TextView
+            android:id="@+id/title_right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical|right"
+            android:singleLine="true"
+            android:gravity="center_vertical"
+            android:layout_marginRight="5dp"
+            android:foregroundGravity="right"
+            android:textColor="@color/black"
+            tools:text="有百年"
+            android:textSize="14sp"/>
+
+
+    </FrameLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

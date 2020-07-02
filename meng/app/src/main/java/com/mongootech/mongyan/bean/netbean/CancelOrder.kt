@@ -1,0 +1,1 @@
+package com.mongootech.mongyan.bean.netbean/** * movieId	string必须影视IDmovieName	string必须影视名称movieImg	string必须影视封面moviePublishTime	string必须影视上映时间movieDirector	string必须演员 */class CancelOrder()

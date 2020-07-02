@@ -1,0 +1,1 @@
+gradlew clean assembleReleaseChannels -PchannelList=web &&  cd release/jiagu && java -jar jiagu.jar -login 18516533553 gfsxs0402 && java -jar jiagu.jar -jiagu ../../app/release/channels/mengyan_origin.apk ../../app/release && python ../ApkResigner.py && cd ../..

@@ -1,0 +1,133 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'realm-android'
+apply plugin: 'com.alibaba.arouter'
+
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+
+// This is added automatically if Kotlin is registered in the project, but Kotlin extension functions
+// for Realm can be excluded if needed.
+realm {
+    kotlinExtensionsEnabled = true
+}
+
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.2.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    //rxhttp
+    api 'com.ljx.rxhttp:rxhttp:2.2.1'
+    kapt 'com.ljx.rxhttp:rxhttp-compiler:2.2.1'
+    //包含kotlin协程
+    api 'com.ljx.rxlife:rxlife-coroutine:2.0.0'
+    api 'com.ljx.rxhttp:rxhttp-annotation:1.0.0'
+    //加密
+    implementation project(path: ':encryption')
+    //logger
+    api 'com.orhanobut:logger:2.2.0'
+    //状态
+    api 'com.gyf.immersionbar:immersionbar:3.0.0'
+    api 'com.gyf.immersionbar:immersionbar-ktx:3.0.0'
+
+    //适配
+    api 'me.jessyan:autosize:1.2.1'
+
+    //rxlife
+    api 'com.trello.rxlifecycle3:rxlifecycle:3.1.0'
+    api 'com.trello.rxlifecycle3:rxlifecycle-components:3.1.0'
+    // If you want to use Kotlin syntax
+    api 'com.trello.rxlifecycle3:rxlifecycle-kotlin:3.1.0'
+    // If you want to use Kotlin syntax with Android Lifecycle
+    api 'com.trello.rxlifecycle3:rxlifecycle-android-lifecycle-kotlin:3.1.0'
+
+    //loading
+    api 'com.kingja.loadsir:loadsir:1.3.8'
+
+    //smartrefreshlayout
+    api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.2'
+
+    //adapter
+    api ('com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.3'){
+        //移除databind
+        exclude group: 'androidx.databinding'
+    }
+
+    //arouter
+    api 'com.alibaba:arouter-api:1.5.0'
+    kapt 'com.alibaba:arouter-compiler:1.2.2'
+
+
+    api 'androidx.recyclerview:recyclerview:1.2.0-alpha01'
+    api 'androidx.cardview:cardview:1.0.0'
+    api 'com.google.android.material:material:1.2.0-alpha06'
+
+    //glide
+    api 'com.github.bumptech.glide:glide:4.11.0'
+    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+    api 'jp.wasabeef:glide-transformations:4.0.0'
+
+    //eventbug
+    api 'org.greenrobot:eventbus:3.2.0'
+
+    //walle
+    implementation 'com.meituan.android.walle:library:1.1.6'
+
+    //tinker
+    // 若使用annotation需要单独引用,对于tinker的其他库都无需再引用
+    api("com.tinkerpatch.sdk:tinkerpatch-android-sdk:${TINKERPATCH_VERSION}") { changing = true }
+
+    //权限
+    api 'com.github.tbruyelle:rxpermissions:0.10.2'
+
+    //Ui xpop
+    api 'com.lxj:xpopup:1.9.0'
+
+
+
+
+
+}

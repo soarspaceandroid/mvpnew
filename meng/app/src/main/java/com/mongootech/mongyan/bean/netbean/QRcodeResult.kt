@@ -1,0 +1,1 @@
+package com.mongootech.mongyan.bean.netbeandata class QRcodeResult(var url:String)

@@ -1,0 +1,1 @@
+package com.mongootech.mongyan.bean.netbeandata class UserInfo(var uId:String,                    var uNickname:String,                    var uImg:String,                    var uSex:String,                    var uBirthday:String,                    var uArea:String)
